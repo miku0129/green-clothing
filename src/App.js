@@ -1,4 +1,4 @@
-import Categories from "./compoments/categories/Categories.component";
+import Categories from "./compoments/categories/categories.component";
 
 const App = () => {
   return <Categories />;
