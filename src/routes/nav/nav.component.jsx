@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./nav.styles.scss";
 
-import { ReactComponent as Shoplogo } from "../../assets/flower-svgrepo-com.svg";
+import { ReactComponent as Shoplogo } from "../../assets/evergreen-icon-svgrepo-com.svg";
 
 const Nav = () => {
   return (
