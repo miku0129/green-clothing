@@ -1,36 +1,18 @@
 import { useState } from "react";
 
-import app from "../../firebase-init";
-import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithRedirect,
-} from "firebase/auth";
-app();
+import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
 const SignIn = () => {
-  const [hasLogin, setHasLogin] = useState(false);
-  console.log("haslogin ", hasLogin);
-  const signin = () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-
-    signInWithRedirect(auth, provider);
-    setHasLogin(true);
-  };
+  const logGoogleUser = async () => {
+    const response = await signInWithGooglePopup(); 
+    console.log(response)
+    createUserDocumentFromAuth(response.user)
+  }
   return (
-    <>
-      {hasLogin === false && (
-        <div>
-          <button onClick={signin}>login</button>
-        </div>
-      )}
-      {hasLogin === true && (
-        <div>
-          <h1>already login</h1>
-        </div>
-      )}
-    </>
+    <div>
+      <h1>Sign In page</h1>
+      <button onClick={logGoogleUser}>sign-in</button>
+    </div>
   );
 };
 
