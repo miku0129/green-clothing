@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebase.utils";
 
 const defaultFormField = {
   displayName: "",
@@ -14,23 +17,17 @@ const SignUpForm = () => {
 
   // console.log("field: ", field);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    //password match
-    //search user in auth
-    //create new user
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log("data: ", data);
-    if (data.password !== data.confirmPassword) {
+    if (password !== confirmPassword) {
       alert("password doesn't match");
       return;
     } else {
-      createAuthUserWithEmailAndPassword(data.email, data.password)
-        .then(() => {
+      createAuthUserWithEmailAndPassword(email, password)
+        .then(async ({ user }) => {
+          await createUserDocumentFromAuth(user, { displayName });
           alert("user is authenticated");
-          setField(defaultFormField) //フォームを初期化
+          setField(defaultFormField); //フォームを初期化
         })
         .catch((e) => {
           alert(`Failed with error code: ${e.code}`);
