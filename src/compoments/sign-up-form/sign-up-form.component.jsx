@@ -24,22 +24,23 @@ const SignUpForm = () => {
     const data = Object.fromEntries(formData.entries());
     console.log("data: ", data);
     if (data.password !== data.confirmPassword) {
-      console.log("password doesn't match");
+      alert("password doesn't match");
       return;
     } else {
       createAuthUserWithEmailAndPassword(data.email, data.password)
         .then(() => {
-          console.log("user is authenticated");
+          alert("user is authenticated");
+          setField(defaultFormField) //フォームを初期化
         })
         .catch((e) => {
-          console.log(`Failed with error code: ${e.code}`);
+          alert(`Failed with error code: ${e.code}`);
         });
     }
   };
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
-    setField({ ...field, [name]: value }); //便利
+    setField({ ...field, [name]: value }); //オブジェクト要素を更新
   };
   return (
     <div>
@@ -80,7 +81,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <button>Sign in</button>
+        <button>sign-in with email and password</button>
       </form>
     </div>
   );
