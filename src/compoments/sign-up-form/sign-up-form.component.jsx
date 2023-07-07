@@ -12,15 +12,30 @@ const SignUpForm = () => {
   const [field, setField] = useState(defaultFormField);
   const { displayName, email, password, confirmPassword } = field;
 
-  console.log("field: ", field);
+  // console.log("field: ", field);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); 
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("submit");
     //password match
     //search user in auth
     //create new user
-  }
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    console.log("data: ", data);
+    if (data.password !== data.confirmPassword) {
+      console.log("password doesn't match");
+      return;
+    } else {
+      createAuthUserWithEmailAndPassword(data.email, data.password)
+        .then(() => {
+          console.log("user is authenticated");
+        })
+        .catch((e) => {
+          console.log(`Failed with error code: ${e.code}`);
+        });
+    }
+  };
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
@@ -29,7 +44,7 @@ const SignUpForm = () => {
   return (
     <div>
       <h1>Sign up with your email and password</h1>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit}>
         <label>Display Name</label>
         <input
           type="text"
