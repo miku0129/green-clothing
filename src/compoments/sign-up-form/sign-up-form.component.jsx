@@ -3,6 +3,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
+import FormInput from "../form-input/form-input.component";
 
 const defaultFormField = {
   displayName: "",
@@ -26,7 +27,6 @@ const SignUpForm = () => {
       createAuthUserWithEmailAndPassword(email, password)
         .then(async ({ user }) => {
           await createUserDocumentFromAuth(user, { displayName });
-          alert("user is authenticated");
           setField(defaultFormField); //フォームを初期化
         })
         .catch((e) => {
@@ -43,8 +43,8 @@ const SignUpForm = () => {
     <div>
       <h1>Sign up with your email and password</h1>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="displayName"
           type="text"
           required
           onChange={handleChanges}
@@ -52,8 +52,8 @@ const SignUpForm = () => {
           value={displayName}
         />
 
-        <label>Email</label>
-        <input
+        <FormInput
+          label="email"
           type="email"
           required
           onChange={handleChanges}
@@ -61,8 +61,8 @@ const SignUpForm = () => {
           value={email}
         />
 
-        <label>Password</label>
-        <input
+        <FormInput
+          label="passowrd"
           type="password"
           required
           onChange={handleChanges}
@@ -70,8 +70,8 @@ const SignUpForm = () => {
           value={password}
         />
 
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="confirmPassword"
           type="password"
           required
           onChange={handleChanges}
