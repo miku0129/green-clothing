@@ -45,38 +45,46 @@ const SignUpForm = () => {
       <form onSubmit={handleSubmit}>
         <FormInput
           label="displayName"
-          type="text"
-          required
-          onChange={handleChanges}
-          name="displayName"
-          value={displayName}
+          inputOptions={{
+            type: "text",
+            required: true,
+            onChange: { handleChanges },
+            name: "displayName",
+            value: displayName,
+          }}
         />
 
         <FormInput
           label="email"
-          type="email"
-          required
-          onChange={handleChanges}
-          name="email"
-          value={email}
+          inputOptions={{
+            type: "email",
+            required: true,
+            onChange: { handleChanges },
+            name: "email",
+            value: email,
+          }}
         />
 
         <FormInput
           label="passowrd"
-          type="password"
-          required
-          onChange={handleChanges}
-          name="password"
-          value={password}
+          inputOptions={{
+            type: "password",
+            required: true,
+            onChange: { handleChanges },
+            name: "password",
+            value: password,
+          }}
         />
 
         <FormInput
           label="confirmPassword"
-          type="password"
-          required
-          onChange={handleChanges}
-          name="confirmPassword"
-          value={confirmPassword}
+          inputOptions={{
+            type: "password",
+            required: true,
+            onChange: { handleChanges },
+            name: "confirmPassword",
+            value: confirmPassword,
+          }}
         />
         <button>sign-in with email and password</button>
       </form>
