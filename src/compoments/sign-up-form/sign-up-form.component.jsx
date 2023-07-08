@@ -5,6 +5,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import "./sign-up-form.styles.scss"; 
+import Button from "../button/button.component";
 
 const defaultFormField = {
   displayName: "",
@@ -16,8 +17,6 @@ const defaultFormField = {
 const SignUpForm = () => {
   const [field, setField] = useState(defaultFormField);
   const { displayName, email, password, confirmPassword } = field;
-
-  // console.log("field: ", field);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +87,7 @@ const SignUpForm = () => {
             value: confirmPassword,
           }}
         />
-        <button>sign-in with email and password</button>
+        <Button buttonType="default" type="submit">Sign up</Button>
       </form>
     </div>
   );
