@@ -12,7 +12,7 @@ const SignIn = () => {
     <div>
       <h1>Sign In page</h1>
       <SignInForm />
-      <button onClick={logGoogleUser}>sign-in</button>
+      <button onClick={logGoogleUser}>sign-in with google account</button>
       <SignUpForm />
     </div>
   );
