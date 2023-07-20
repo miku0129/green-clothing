@@ -33,15 +33,6 @@ export const db = getFirestore();
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
-export const signInWithEmailAndPasswordInput = (auth, email, password) => {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential)=>{
-      window.alert(`Welcome, ${userCredential.user.uid}`)
-    }).catch((error) => {
-      console.log('error: ', error.message)
-    })
-};
-
-
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
@@ -71,7 +62,13 @@ export const createUserDocumentFromAuth = async (
   }
 };
 
-export const createAuthUserWithEmailAndPassword = async (email, passowrd) => {
-  if (!email || !passowrd) return;
-  return await createUserWithEmailAndPassword(auth, email, passowrd);
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserEmailAndPassword = async (auth, email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
 };
