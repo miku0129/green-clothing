@@ -1,10 +1,14 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
-import "./nav.styles.scss";
 
 import { ReactComponent as Shoplogo } from "../../assets/evergreen-icon-svgrepo-com.svg";
+import { UserContext } from "../../contexts/user.context";
+
+import "./nav.styles.scss";
 
 const Nav = () => {
+  const {currentUser} = useContext(UserContext)
+  console.log("current user: ", currentUser)
   return (
     <Fragment>
       <div className="navigation">

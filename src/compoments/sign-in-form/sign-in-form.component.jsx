@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+
+import { UserContext } from "../../contexts/user.context";
+
 import {
   signInAuthUserEmailAndPassword,
   auth,
@@ -20,6 +23,8 @@ const SignInForm = () => {
   const [field, setField] = useState(defaultFormField);
   const { email, password } = field;
 
+  const { setCurrentUser } = useContext(UserContext)
+
   const resetFormFields = () => {
     setField(defaultFormField);
   };
@@ -32,12 +37,12 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await signInAuthUserEmailAndPassword(
+      const {user} = await signInAuthUserEmailAndPassword(
         auth,
         email,
         password
       );
-      console.log("response from singin: ", response);
+      setCurrentUser(user); 
       resetFormFields();
     } catch (error) {
       switch (error.code) {
