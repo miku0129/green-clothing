@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
+import CheckoutItem from "../../compoments/checkout-item/checkout-item.component";
+
+import "./checkout.styles.scss";
+
 const Checkout = () => {
-  const { cartItems, setCartItems, setToggeCartDropdown } =
-    useContext(CartContext);
+  const { cartItems, setToggeCartDropdown } = useContext(CartContext);
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -21,55 +24,29 @@ const Checkout = () => {
     curricuateTotalAmount();
   }, [cartItems]);
 
-  const increaseItemInCart = (id) => {
-    const updatedCart = cartItems.map((item) => {
-      if (item.id === id) item.quantity++;
-      return item;
-    });
-    setCartItems(updatedCart);
-  };
-
-  const decreaseItemInCart = (id) => {
-    const updatedCart = cartItems.map((item) => {
-      if (item.id === id) item.quantity--;
-      return item;
-    });
-    setCartItems(updatedCart);
-  };
-
-  const removeItemFromCart = (id) => {
-    const updatedCart = cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedCart);
-  };
-
   return (
-    <div>
-      <h1>Checkout page</h1>
-      {cartItems &&
-        cartItems.map(({ name, price, imageUrl, quantity, id }) => {
-          return (
-            <div>
-              <img src={imageUrl} alt={name} />
-              <div>
-                <div>{name}</div>
-                <div>
-                  <span onClick={() => increaseItemInCart(id)}>increase </span>
-                  {quantity}
-                  <span onClick={() => decreaseItemInCart(id)}> decrease</span>
-                </div>
-                <div>{price}</div>
-                <div
-                  onClick={() => {
-                    removeItemFromCart(id);
-                  }}
-                >
-                  x
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      <div>Total: {totalAmount}</div>
+    <div className="checkout-container">
+      <div className="checkout-header">
+        <div className="header-block">
+          <span>Product</span>
+        </div>
+        <div className="header-block">
+          <span>Description</span>
+        </div>
+        <div className="header-block">
+          <span>Quantity</span>
+        </div>
+        <div className="header-block">
+          <span>Price</span>
+        </div>
+        <div className="header-block">
+          <span>Remove</span>
+        </div>
+      </div>
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
+      <span className="total">Total: {totalAmount}</span>
     </div>
   );
 };
