@@ -15,7 +15,7 @@ import "./nav.styles.scss";
 
 const Nav = () => {
   const { currentUser } = useContext(UserContext);
-  const { cartContext} = useContext(CartContext); 
+  const { toggleCartDropdown } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -39,9 +39,9 @@ const Nav = () => {
               SIGN IN
             </Link>
           )}
-          <CartIcon/>
+          <CartIcon />
         </div>
-        {cartContext && <CartDropdown />}
+        {toggleCartDropdown && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>

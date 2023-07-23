@@ -7,15 +7,19 @@ import { CartContext } from "../../contexts/cart.context";
 import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
-  const { cartContext, setCartContext, cartCount } = useContext(CartContext);
+  const { toggleCartDropdown, setToggeCartDropdown, cartCount } =
+    useContext(CartContext);
 
-  const cartContextHandler = () => {
-    setCartContext(!cartContext);
+  const toggleCartDropdownHandler = () => {
+    setToggeCartDropdown(!toggleCartDropdown);
   };
 
   return (
     <div className="cart-icon-container">
-      <ShoppinIcon className="shopping-icon" onClick={cartContextHandler} />
+      <ShoppinIcon
+        className="shopping-icon"
+        onClick={toggleCartDropdownHandler}
+      />
       <span className="item-count">{cartCount}</span>
     </div>
   );
