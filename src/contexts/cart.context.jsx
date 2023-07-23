@@ -24,11 +24,9 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
     .filter((item) => item.quantity > 0);
 };
 
-const removeAllCartItem = (cartItems, cartItemToRemove) =>{
-  console.log("click")
-  return cartItems.filter((item) => item.id !== cartItemToRemove.id);
-  
-}
+const clearCartItem = (cartItems, cartItemToClear) => {
+  return cartItems.filter((item) => item.id !== cartItemToClear.id);
+};
 
 export const CartContext = createContext({
   toggleCartDropdown: null,
@@ -36,19 +34,27 @@ export const CartContext = createContext({
   cartItems: [],
   addItemToCart: () => {},
   cartCount: 0,
+  cartTotalPrice: 0
 });
 
 export const CartContextProvider = ({ children }) => {
   const [toggleCartDropdown, setToggeCartDropdown] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
   useEffect(() => {
-    const newCartCount = cartItems.reduce(
+    const updatedCountItem = cartItems.reduce(
       (total, currentItem) => total + currentItem.quantity,
       0
     );
-    setCartCount(newCartCount);
+    setCartCount(updatedCountItem);
+
+    const updatedTotalPrice = cartItems.reduce(
+      (total, current) => total + current.price * current.quantity,
+      0
+    );
+    setCartTotalPrice(updatedTotalPrice);
   }, [cartItems]);
 
   const addItemToCart = (productToAdd) => {
@@ -59,8 +65,8 @@ export const CartContextProvider = ({ children }) => {
     setCartItems(removeCartItem(cartItems, cartItemToRemove));
   };
 
-  const removeAllItemToCart = (cartItemToRemove) => {
-    setCartItems(removeAllCartItem(cartItems, cartItemToRemove));
+  const clearItemFromCart = (cartItemToRemove) => {
+    setCartItems(clearCartItem(cartItems, cartItemToRemove));
   };
 
   const value = {
@@ -70,8 +76,9 @@ export const CartContextProvider = ({ children }) => {
     setCartItems,
     addItemToCart,
     removeItemToCart,
-    removeAllItemToCart,
+    clearItemFromCart,
     cartCount,
+    cartTotalPrice
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

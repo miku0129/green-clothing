@@ -6,23 +6,12 @@ import CheckoutItem from "../../compoments/checkout-item/checkout-item.component
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const { cartItems, setToggeCartDropdown } = useContext(CartContext);
-  const [totalAmount, setTotalAmount] = useState(0);
+  const { cartItems, setToggeCartDropdown, cartTotalPrice } = useContext(CartContext);
 
   useEffect(() => {
     setToggeCartDropdown(false);
   }, []);
 
-  useEffect(() => {
-    const curricuateTotalAmount = () => {
-      const updatedTotalAmount = cartItems.reduce(
-        (total, current) => total + current.price * current.quantity,
-        0
-      );
-      setTotalAmount(updatedTotalAmount);
-    };
-    curricuateTotalAmount();
-  }, [cartItems]);
 
   return (
     <div className="checkout-container">
@@ -46,7 +35,7 @@ const Checkout = () => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <span className="total">Total: {totalAmount}</span>
+      <span className="total">Total: ${cartTotalPrice}</span>
     </div>
   );
 };
