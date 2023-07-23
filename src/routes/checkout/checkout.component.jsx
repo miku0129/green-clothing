@@ -2,16 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
 import CheckoutItem from "../../compoments/checkout-item/checkout-item.component";
+import PaymentForm from "../../compoments/payment-form/payment-form.component";
 
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const { cartItems, setToggeCartDropdown, cartTotalPrice } = useContext(CartContext);
+  const { cartItems, setToggeCartDropdown, cartTotalPrice } =
+    useContext(CartContext);
 
   useEffect(() => {
     setToggeCartDropdown(false);
   }, []);
-
 
   return (
     <div className="checkout-container">
@@ -36,6 +37,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <span className="total">Total: ${cartTotalPrice}</span>
+      <PaymentForm />
     </div>
   );
 };
