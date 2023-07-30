@@ -5,9 +5,6 @@ import ProductCard from "../product-card/product-card.component";
 import "./category.styles.scss";
 
 const Category = ({ categoryTitle, categoriesMap }) => {
-  console.log("categoryTitle: ", categoryTitle);
-  console.log("categoriesMap: ", categoriesMap);
-
   return (
     <Fragment>
       {Object.keys(categoriesMap)
