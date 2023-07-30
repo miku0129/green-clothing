@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
 
 import { UserProvider } from "./contexts/user.context";
-import { ProductsProvider } from "./contexts/products.context";
+import { CategoriesProvider } from "./contexts/categories.context";
 import { CartContextProvider } from "./contexts/cart.context";
 
 import App from "./App";
@@ -18,13 +18,13 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ProductsProvider>
+        <CategoriesProvider>
           <CartContextProvider>
             <Elements stripe={stripePromise}>
               <App />
             </Elements>
           </CartContextProvider>
-        </ProductsProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
