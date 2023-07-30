@@ -18,7 +18,7 @@ const CartDropdown = () => {
           <CartItem key={item.id} cartItem={item} />
         ))}
       </div>
-      <Link to="shop/checkout">
+      <Link to="/checkout">
         <Button>checkout</Button>
       </Link>
     </div>
