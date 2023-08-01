@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
 import CheckoutItem from "../../compoments/checkout-item/checkout-item.component";
 import PaymentForm from "../../compoments/payment-form/payment-form.component";
 
-import "./checkout.styles.scss";
+import { CheckoutContainer } from "./checkout.styles";
 
 const Checkout = () => {
   const { cartItems, setToggeCartDropdown, cartTotalPrice } =
@@ -15,7 +15,7 @@ const Checkout = () => {
   }, []);
 
   return (
-    <div className="checkout-container">
+    <CheckoutContainer>
       <div className="checkout-header">
         <div className="header-block">
           <span>Product</span>
@@ -38,7 +38,7 @@ const Checkout = () => {
       ))}
       <span className="total">Total: ${cartTotalPrice}</span>
       <PaymentForm />
-    </div>
+    </CheckoutContainer>
   );
 };
 
