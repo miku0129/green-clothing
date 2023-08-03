@@ -2,18 +2,14 @@ import { useContext } from "react";
 
 import { CartContext } from "../../contexts/cart.context";
 
-import {
-  CartIconContainer,
-  ShoppingIcon,
-  ItemCount,
-} from "./cart-icon.styles";
+import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 
 const CartIcon = () => {
-  const { toggleCartDropdown, setToggeCartDropdown, cartCount } =
+  const { toggleCartDropdown, setToggleCartDropdown, cartCount } =
     useContext(CartContext);
 
   const toggleCartDropdownHandler = () => {
-    setToggeCartDropdown(!toggleCartDropdown);
+    setToggleCartDropdown(!toggleCartDropdown);
   };
 
   return (

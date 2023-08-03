@@ -7,11 +7,11 @@ import PaymentForm from "../../compoments/payment-form/payment-form.component";
 import { CheckoutContainer } from "./checkout.styles";
 
 const Checkout = () => {
-  const { cartItems, setToggeCartDropdown, cartTotalPrice } =
+  const { cartItems, setToggleCartDropdown, cartTotalPrice } =
     useContext(CartContext);
 
   useEffect(() => {
-    setToggeCartDropdown(false);
+    setToggleCartDropdown(false);
   }, []);
 
   return (
