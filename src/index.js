@@ -2,10 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
+import { Provider } from "react-redux";
 
-import { UserProvider } from "./contexts/user.context";
+// import { UserProvider } from "./contexts/user.context";
 import { CategoriesProvider } from "./contexts/categories.context";
 import { CartContextProvider } from "./contexts/cart.context";
+import { store } from "./store/store";
 
 import App from "./App";
 import { stripePromise } from "./utils/stripe/stripe.utils";
@@ -16,17 +18,19 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <CategoriesProvider>
-          <CartContextProvider>
-            <Elements stripe={stripePromise}>
-              <App />
-            </Elements>
-          </CartContextProvider>
-        </CategoriesProvider>
-      </UserProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        {/* <UserProvider> */}
+          <CategoriesProvider>
+            <CartContextProvider>
+              <Elements stripe={stripePromise}>
+                <App />
+              </Elements>
+            </CartContextProvider>
+          </CategoriesProvider>
+        {/* </UserProvider> */}
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

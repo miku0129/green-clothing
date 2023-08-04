@@ -1,13 +1,14 @@
 import { Fragment, useContext } from "react";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 import CartIcon from "../../compoments/cart-icon/cart-icon.component";
 import CartDropdown from "../../compoments/cart-dropdown/cart-dropdown.component";
 
 import { ReactComponent as Shoplogo } from "../../assets/evergreen-icon-svgrepo-com.svg";
 
-import { UserContext } from "../../contexts/user.context";
 import { CartContext } from "../../contexts/cart.context";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
@@ -19,7 +20,7 @@ import {
 } from "./nav.styles";
 
 const Nav = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { toggleCartDropdown } = useContext(CartContext);
 
   return (

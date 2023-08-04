@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -80,10 +81,7 @@ export const CartContextProvider = ({ children }) => {
   ] = useReducer(cartReducer, INITIAL_STATE);
 
   const setToggleCartDropdown = (bool) => {
-    dispatch({
-      type: CART_ACTION_TYPES.SET_CART_DROP_DOWN,
-      payload: bool,
-    });
+    dispatch(createAction(CART_ACTION_TYPES.SET_CART_DROP_DOWN, bool));
   };
 
   const updateCartItemReducer = (newCartItems) => {
@@ -97,14 +95,13 @@ export const CartContextProvider = ({ children }) => {
       0
     );
 
-    dispatch({
-      type: CART_ACTION_TYPES.SET_CART_ITEMS,
-      payload: {
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
         cartItems: newCartItems,
         cartTotalPrice: newCartTotal,
         cartCount: newCartCount,
-      },
-    });
+      })
+    );
   };
 
   const addItemToCart = (productToAdd) => {
