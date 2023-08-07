@@ -6,7 +6,6 @@ import { Routes, Route } from "react-router-dom";
 import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
-  getCategoriesAndDocuments,
 } from "./utils/firebase/firebase.utils";
 
 import Home from "./routes/home/home.component";
@@ -15,7 +14,6 @@ import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 import { setCurrentUser } from "./store/user/user.action";
-import { setCategories } from "./store/categories/category.action";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,14 +26,6 @@ const App = () => {
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    const getCategoriesMap = async () => {
-      const categoryMap = await getCategoriesAndDocuments();
-      dispatch(setCategories(categoryMap));
-    };
-    getCategoriesMap();
   }, []);
 
   return (
