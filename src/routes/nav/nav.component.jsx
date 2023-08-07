@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
@@ -7,8 +7,8 @@ import CartDropdown from "../../compoments/cart-dropdown/cart-dropdown.component
 
 import { ReactComponent as Shoplogo } from "../../assets/evergreen-icon-svgrepo-com.svg";
 
-import { CartContext } from "../../contexts/cart.context";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectToggleCartDropdown } from "../../store/cart/cart.selector";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
@@ -21,7 +21,10 @@ import {
 
 const Nav = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const { toggleCartDropdown } = useContext(CartContext);
+
+  const toggleCartDropdown = useSelector(selectToggleCartDropdown);
+
+  console.log("togglecartdropdown? ", toggleCartDropdown)
 
   return (
     <Fragment>
@@ -41,7 +44,7 @@ const Nav = () => {
           ) : (
             <NavLink to="/auth">SIGN IN</NavLink>
           )}
-          <CartIcon />
+          <CartIcon toggleCartDropdown={toggleCartDropdown}/>
         </NavLinks>
         {toggleCartDropdown && <CartDropdown />}
       </NavigationContainer>
