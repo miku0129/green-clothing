@@ -1,5 +1,13 @@
 import { createSelector } from "reselect";
 
-export const selectToggleCartDropdown = (state) => { 
-  console.log("state?", state)
-  return state.cart.toggleCartDropdown};
+export const selectToggleCartDropdown = (state) => {
+  return state.cart.toggleCartDropdown;
+};
+
+export const selectCartItems = (state) => {
+  return state.cart.cartItems;
+};
+
+export const selectCartCount = (state) => {
+  return state.cart.cartCount;
+};

@@ -8,7 +8,10 @@ import CartDropdown from "../../compoments/cart-dropdown/cart-dropdown.component
 import { ReactComponent as Shoplogo } from "../../assets/evergreen-icon-svgrepo-com.svg";
 
 import { selectCurrentUser } from "../../store/user/user.selector";
-import { selectToggleCartDropdown } from "../../store/cart/cart.selector";
+import {
+  selectCartItems,
+  selectToggleCartDropdown,
+} from "../../store/cart/cart.selector";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
@@ -23,8 +26,7 @@ const Nav = () => {
   const currentUser = useSelector(selectCurrentUser);
 
   const toggleCartDropdown = useSelector(selectToggleCartDropdown);
-
-  console.log("togglecartdropdown? ", toggleCartDropdown)
+  const cartItems = useSelector(selectCartItems);
 
   return (
     <Fragment>
@@ -44,7 +46,10 @@ const Nav = () => {
           ) : (
             <NavLink to="/auth">SIGN IN</NavLink>
           )}
-          <CartIcon toggleCartDropdown={toggleCartDropdown}/>
+          <CartIcon
+            toggleCartDropdown={toggleCartDropdown}
+            cartItems={cartItems}
+          />
         </NavLinks>
         {toggleCartDropdown && <CartDropdown />}
       </NavigationContainer>
