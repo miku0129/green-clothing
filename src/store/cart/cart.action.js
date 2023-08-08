@@ -33,3 +33,14 @@ export const handleUpdateCartCount = (newCartItems) => {
   );
   return createAction(CART_ACTION_TYPES.SET_CART_COUNT, newCartCount);
 };
+
+export const handleUpdateCartTotalPrice = (newCartItems) => {
+  const newCartTotalPrice = newCartItems.reduce(
+    (total, current) => total + current.price * current.quantity,
+    0
+  );
+  return createAction(
+    CART_ACTION_TYPES.SET_CART_TOTAL_PRICE,
+    newCartTotalPrice
+  );
+};

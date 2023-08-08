@@ -11,3 +11,7 @@ export const selectCartItems = (state) => {
 export const selectCartCount = (state) => {
   return state.cart.cartCount;
 };
+
+export const selectCartTotoalPrice = (state) => {
+  return state.cart.cartTotalPrice;
+};
