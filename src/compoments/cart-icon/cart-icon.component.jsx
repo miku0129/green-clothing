@@ -5,7 +5,7 @@ import {
   toggleCartDropdownAction,
   // updateCartCountAction,
 
-  updateCartTotalPriceAction,
+  // updateCartTotalPriceAction,
 } from "../../store/cart/cart.action";
 import { selectCartCount } from "../../store/cart/cart.selector";
 
@@ -14,7 +14,7 @@ import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 const CartIcon = ({ toggleCartDropdown, cartItems }) => {
   const dispatch = useDispatch();
   const toggleCartDropdownHandler = () => {
-    dispatch(toggleCartDropdownAction(toggleCartDropdown));
+    dispatch(toggleCartDropdownAction(!toggleCartDropdown));
   };
 
   const cartCount = useSelector(selectCartCount);
