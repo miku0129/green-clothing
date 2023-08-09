@@ -3,8 +3,6 @@ import { CART_ACTION_TYPES } from "./cart.types";
 const INITIAL_STATE = {
   toggleCartDropdown: false,
   cartItems: [],
-  cartCount: 0,
-  cartTotalPrice: 0,
 };
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
@@ -20,16 +18,6 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         toggleCartDropdown: payload,
-      };
-    case CART_ACTION_TYPES.SET_CART_COUNT:
-      return {
-        ...state,
-        cartCount: payload,
-      };
-    case CART_ACTION_TYPES.SET_CART_TOTAL_PRICE:
-      return {
-        ...state,
-        cartTotalPrice: payload,
       };
 
     default:

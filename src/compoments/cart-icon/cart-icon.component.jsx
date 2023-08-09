@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
   toggleCartDropdownAction,
-  updateCartCountAction,
+  // updateCartCountAction,
+
   updateCartTotalPriceAction,
 } from "../../store/cart/cart.action";
 import { selectCartCount } from "../../store/cart/cart.selector";
@@ -17,13 +18,13 @@ const CartIcon = ({ toggleCartDropdown, cartItems }) => {
   };
 
   const cartCount = useSelector(selectCartCount);
-  useEffect(() => {
-    const handleCartCountAndCartTotalPrice = () => {
-      dispatch(updateCartCountAction(cartItems));
-      dispatch(updateCartTotalPriceAction(cartItems));
-    };
-    handleCartCountAndCartTotalPrice();
-  }, [cartItems]);
+  // useEffect(() => {
+  //   const handleCartCountAndCartTotalPrice = () => {
+  //     dispatch(updateCartCountAction(cartItems));
+  //     dispatch(updateCartTotalPriceAction(cartItems));
+  //   };
+  //   handleCartCountAndCartTotalPrice();
+  // }, [cartItems]);
 
   return (
     <CartIconContainer>

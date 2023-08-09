@@ -47,22 +47,3 @@ export const clearItemFromCartAction = (cartItems, cartItemToClear) => {
   const newCartItems = clearCartItem(cartItems, cartItemToClear);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
-
-export const updateCartCountAction = (newCartItems) => {
-  const newCartCount = newCartItems.reduce(
-    (total, currentItem) => total + currentItem.quantity,
-    0
-  );
-  return createAction(CART_ACTION_TYPES.SET_CART_COUNT, newCartCount);
-};
-
-export const updateCartTotalPriceAction = (newCartItems) => {
-  const newCartTotalPrice = newCartItems.reduce(
-    (total, current) => total + current.price * current.quantity,
-    0
-  );
-  return createAction(
-    CART_ACTION_TYPES.SET_CART_TOTAL_PRICE,
-    newCartTotalPrice
-  );
-};
