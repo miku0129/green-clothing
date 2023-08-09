@@ -1,29 +1,33 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { handleToggleCartDropdownAction, handleUpdateCartCount, handleUpdateCartTotalPrice } from "../../store/cart/cart.action";
+import {
+  toggleCartDropdownAction,
+  updateCartCountAction,
+  updateCartTotalPriceAction,
+} from "../../store/cart/cart.action";
 import { selectCartCount } from "../../store/cart/cart.selector";
 
 import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 
 const CartIcon = ({ toggleCartDropdown, cartItems }) => {
   const dispatch = useDispatch();
-  const handleToggleCartDropdown = () => {
-    dispatch(handleToggleCartDropdownAction(toggleCartDropdown));
+  const toggleCartDropdownHandler = () => {
+    dispatch(toggleCartDropdownAction(toggleCartDropdown));
   };
 
-  const cartCount = useSelector(selectCartCount); 
-  useEffect(()=> {
+  const cartCount = useSelector(selectCartCount);
+  useEffect(() => {
     const handleCartCountAndCartTotalPrice = () => {
-      dispatch(handleUpdateCartCount(cartItems))
-      dispatch(handleUpdateCartTotalPrice(cartItems))
-    }
-    handleCartCountAndCartTotalPrice(); 
-  }, [cartItems])
+      dispatch(updateCartCountAction(cartItems));
+      dispatch(updateCartTotalPriceAction(cartItems));
+    };
+    handleCartCountAndCartTotalPrice();
+  }, [cartItems]);
 
   return (
     <CartIconContainer>
-      <ShoppingIcon onClick={handleToggleCartDropdown} />
+      <ShoppingIcon onClick={toggleCartDropdownHandler} />
 
       <ItemCount>{cartCount}</ItemCount>
     </CartIconContainer>

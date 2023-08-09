@@ -1,20 +1,20 @@
 // import { createContext, useReducer } from "react";
 // import { createAction } from "../utils/reducer/reducer.utils";
 
-// // const addCartItem = (cartItems, productToAdd) => {
-// //   const existingCartItem = cartItems.find(
-// //     (cartItem) => cartItem.id === productToAdd.id
-// //   );
+// const addCartItem = (cartItems, productToAdd) => {
+//   const existingCartItem = cartItems.find(
+//     (cartItem) => cartItem.id === productToAdd.id
+//   );
 
-// //   if (existingCartItem) {
-// //     return cartItems.map((cartItem) =>
-// //       cartItem.id === productToAdd.id
-// //         ? { ...cartItem, quantity: cartItem.quantity + 1 }
-// //         : cartItem
-// //     );
-// //   }
-// //   return [...cartItems, { ...productToAdd, quantity: 1 }];
-// // };
+//   if (existingCartItem) {
+//     return cartItems.map((cartItem) =>
+//       cartItem.id === productToAdd.id
+//         ? { ...cartItem, quantity: cartItem.quantity + 1 }
+//         : cartItem
+//     );
+//   }
+//   return [...cartItems, { ...productToAdd, quantity: 1 }];
+// };
 
 // const removeCartItem = (cartItems, cartItemToRemove) => {
 //   return cartItems
@@ -30,23 +30,23 @@
 // };
 
 // export const CartContext = createContext({
-//   // toggleCartDropdown: null,
-//   // setToggleCartDropdown: () => null,
-//   // cartItems: [],
-//   // addItemToCart: () => {},
+//   toggleCartDropdown: null,
+//   setToggleCartDropdown: () => null,
+//   cartItems: [],
+//   addItemToCartAction: () => {},
 //   removeItemToCart: () => null,
-//   clearItemFromCart: () => null,
-//   // cartCount: 0,
+//   clearItemFromCartAction: () => null,
+//   cartCount: 0,
 //   cartTotalPrice: 0,
 // });
 
 // const CART_ACTION_TYPES = {
-//   // SET_CART_ITEMS: "SET_CART_ITEMS",
-//   // SET_CART_DROP_DOWN: "SET_CART_DROP_DOWN",
+//   SET_CART_ITEMS: "SET_CART_ITEMS",
+//   SET_CART_DROP_DOWN: "SET_CART_DROP_DOWN",
 // };
 
 // const INITIAL_STATE = {
-//   // toggleCartDropdown: false,
+//   toggleCartDropdown: false,
 //   cartItems: [],
 //   cartCount: 0,
 //   cartTotalPrice: 0,
@@ -80,31 +80,31 @@
 //     dispatch,
 //   ] = useReducer(cartReducer, INITIAL_STATE);
 
-//   // const setToggleCartDropdown = (bool) => {
-//   //   dispatch(createAction(CART_ACTION_TYPES.SET_CART_DROP_DOWN, bool));
-//   // };
-
-//   // const updateCartItemReducer = (newCartItems) => {
-//     // const newCartCount = newCartItems.reduce(
-//     //   (total, currentItem) => total + currentItem.quantity,
-//     //   0
-//     // );
-
-//     // const newCartTotal = newCartItems.reduce(
-//     //   (total, current) => total + current.price * current.quantity,
-//     //   0
-//     // );
-
-//     // dispatch(
-//     //   createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
-//     //     cartItems: newCartItems,
-//     //     cartTotalPrice: newCartTotal,
-//     //     // cartCount: newCartCount,
-//     //   })
-//     // );
+//   const setToggleCartDropdown = (bool) => {
+//     dispatch(createAction(CART_ACTION_TYPES.SET_CART_DROP_DOWN, bool));
 //   };
 
-//   // const addItemToCart = (productToAdd) => {
+//   const updateCartItemReducer = (newCartItems) => {
+//     const newCartCount = newCartItems.reduce(
+//       (total, currentItem) => total + currentItem.quantity,
+//       0
+//     );
+
+//     const newCartTotal = newCartItems.reduce(
+//       (total, current) => total + current.price * current.quantity,
+//       0
+//     );
+
+//     dispatch(
+//       createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+//         cartItems: newCartItems,
+//         cartTotalPrice: newCartTotal,
+//         cartCount: newCartCount,
+//       })
+//     );
+//   };
+
+//   // const addItemToCartAction = (productToAdd) => {
 //   //   const newCartItems = addCartItem(cartItems, productToAdd);
 //   //   updateCartItemReducer(newCartItems);
 //   // };
@@ -114,19 +114,19 @@
 //     updateCartItemReducer(newCartItems);
 //   };
 
-//   const clearItemFromCart = (cartItemToRemove) => {
+//   const clearItemFromCartAction = (cartItemToRemove) => {
 //     const newCartItems = clearCartItem(cartItems, cartItemToRemove);
 //     updateCartItemReducer(newCartItems);
 //   };
 
 //   const value = {
-//     // toggleCartDropdown,
-//     // setToggleCartDropdown,
-//     cartItems,
-//     // addItemToCart,
+//     // // toggleCartDropdown,
+//     // // setToggleCartDropdown,
+//     // cartItems,
+//     // // addItemToCartAction,
 //     removeItemToCart,
-//     clearItemFromCart,
-//     // cartCount,
+//     clearItemFromCartAction,
+//     cartCount,
 //     cartTotalPrice,
 //   };
 

@@ -9,7 +9,7 @@ import {
   selectCartItems,
   selectCartTotoalPrice,
 } from "../../store/cart/cart.selector";
-import { handleToggleCartDropdownAction } from "../../store/cart/cart.action";
+import { toggleCartDropdownAction } from "../../store/cart/cart.action";
 
 import { CheckoutContainer } from "./checkout.styles";
 
@@ -17,11 +17,10 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const toggleCartDropdown = useSelector(selectToggleCartDropdown);
   if (toggleCartDropdown) {
-    dispatch(handleToggleCartDropdownAction(toggleCartDropdown));
+    dispatch(toggleCartDropdownAction(toggleCartDropdown));
   }
   const cartItems = useSelector(selectCartItems);
   const cartTotalPrice = useSelector(selectCartTotoalPrice);
-  console.log("cartitems ??", cartItems);
 
   return (
     <CheckoutContainer>

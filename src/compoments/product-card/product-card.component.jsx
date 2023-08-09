@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-import { addItemToCart } from "../../store/cart/cart.action";
+import { addItemToCartAction } from "../../store/cart/cart.action";
 import { selectCartItems } from "../../store/cart/cart.selector";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const addProductToCart = () => {
-    dispatch(addItemToCart(cartItems, product));
+    dispatch(addItemToCartAction(cartItems, product));
   };
 
   return (
