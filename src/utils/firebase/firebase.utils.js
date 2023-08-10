@@ -90,7 +90,7 @@ export const createUserDocumentFromAuth = async (
       console.log(error);
     }
   }
-  return userSnapshot; 
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
