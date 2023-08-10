@@ -28,6 +28,7 @@ const Nav = () => {
   const toggleCartDropdown = useSelector(selectToggleCartDropdown);
   const cartItems = useSelector(selectCartItems);
 
+
   return (
     <Fragment>
       <NavigationContainer>
