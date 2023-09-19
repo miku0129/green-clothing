@@ -10,6 +10,8 @@ import {
 
 import { SignupContainer } from "./sign-up-form.styles";
 
+import { UserCredential } from "firebase/auth";
+
 const defaultFormField = {
   displayName: "",
   email: "",
@@ -21,17 +23,17 @@ const SignUpForm = () => {
   const [field, setField] = useState(defaultFormField);
   const { displayName, email, password, confirmPassword } = field;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("password doesn't match");
       return;
     } else {
       try {
-        const { user } = await createAuthUserWithEmailAndPassword(
-          email,
-          password
-        );
+        let user: UserCredential | undefined;
+        {
+          user = await createAuthUserWithEmailAndPassword(email, password);
+        }
 
         await createUserDocumentFromAuth(user, { displayName });
         setField(defaultFormField); //フォームを初期化
@@ -41,7 +43,7 @@ const SignUpForm = () => {
     }
   };
 
-  const handleChanges = (e) => {
+  const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setField({ ...field, [name]: value }); //オブジェクト要素を更新
   };
