@@ -63,7 +63,7 @@ const SignInForm = () => {
     }
   };
 
-  const handleChanges = (e) => {
+  const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setField({ ...field, [name]: value }); //オブジェクト要素を更新
   };
