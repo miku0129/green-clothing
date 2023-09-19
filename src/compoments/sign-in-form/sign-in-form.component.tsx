@@ -6,14 +6,14 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import {
   signInAuthUserEmailAndPassword,
-  auth,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 
 import { setCurrentUser } from "../../store/user/user.action";
 
 import { SigninContainer } from "./sign-in-form.styles";
-import { getAuth } from "firebase/auth";
+
+import { UserCredential, getAuth } from "firebase/auth";
 
 const defaultFormField = {
   email: "",
@@ -39,9 +39,11 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await signInAuthUserEmailAndPassword(auth, email, password);
-      console.log("user.user", user.user);
-      dispatch(setCurrentUser(user.user));
+      const user: UserCredential | undefined =
+        await signInAuthUserEmailAndPassword(auth, email, password);
+      user !== undefined
+        ? dispatch(setCurrentUser(user.user))
+        : console.log("user is undefiend");
       alert("login succeed");
       resetFormFields();
     } catch (error) {
