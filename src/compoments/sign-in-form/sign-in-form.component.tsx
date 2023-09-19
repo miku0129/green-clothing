@@ -14,6 +14,7 @@ import { setCurrentUser } from "../../store/user/user.action";
 import { SigninContainer } from "./sign-in-form.styles";
 
 import { UserCredential, getAuth } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 
 const defaultFormField = {
   email: "",
@@ -47,15 +48,17 @@ const SignInForm = () => {
       alert("login succeed");
       resetFormFields();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("no user associated with this email");
-          break;
-        default:
-          console.log("error: ", error);
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case "auth/wrong-password":
+            alert("incorrect password for email");
+            break;
+          case "auth/user-not-found":
+            alert("no user associated with this email");
+            break;
+          default:
+            console.log("error: ", error);
+        }
       }
     }
   };
