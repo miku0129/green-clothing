@@ -23,8 +23,10 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => {
 };
 
 export type ButtonProps = {
-  buttonType: string;
+  buttonType?: string;
+  type?: string;
   children: React.ReactNode;
+  onClick?: () => Promise<void>
 };
 
 const Button: React.FC<ButtonProps> = ({
