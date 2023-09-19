@@ -37,7 +37,7 @@ const SignInForm = () => {
     await signInWithGooglePopup();
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const user: UserCredential | undefined =
