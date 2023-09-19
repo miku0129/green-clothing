@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   BaseButton,
   GoogleSignInButton,
@@ -20,7 +22,16 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => {
   return types[buttonType];
 };
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+export type ButtonProps = {
+  buttonType: string;
+  children: React.ReactNode;
+};
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  buttonType,
+  ...otherProps
+}) => {
   const CustomButton = getButton(buttonType);
   return <CustomButton {...otherProps}>{children}</CustomButton>;
 };
