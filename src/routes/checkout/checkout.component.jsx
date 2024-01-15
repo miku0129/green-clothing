@@ -2,7 +2,8 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 
 import CheckoutItem from "../../compoments/checkout-item/checkout-item.component";
-import PaymentForm from "../../compoments/payment-form/payment-form.component";
+
+import PaymentCheckout from "../../compoments/payment-checkout/payment-checkout.component";
 
 import {
   selectToggleCartDropdown,
@@ -45,7 +46,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <span className="total">Total: ${cartTotalPrice}</span>
-      <PaymentForm />
+      <PaymentCheckout props={cartTotalPrice}/>
     </CheckoutContainer>
   );
 };
