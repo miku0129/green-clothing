@@ -1,12 +1,29 @@
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useState } from "react";
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
 
-import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-import { PaymentFormContainer, FormContainer } from "./payment-form.styles";
+import "./payment-form.styles.scss";
 
-const PaymentForm = () => {
+const PaymentForm = ({ props }) => {
   const stripe = useStripe();
   const elements = useElements();
+
+  const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState(false);
+
+  //Stripeは金額が通貨の最小単位で指定されると想定されるため、
+  //10eurを請求する場合は amountを1000とする必要がある
+  const amount = props * 100;
+
+  const handleError = (error) => {
+    setLoading(false);
+    setErrorMessage(error.message);
+  };
 
   const paymentHandler = async (e) => {
     e.preventDefault();
@@ -15,45 +32,63 @@ const PaymentForm = () => {
       return;
     }
 
+    // Trigger form validation and wallet collection
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      console.log("error during submission", submitError);
+      return;
+    }
+
+    setLoading(true);
+
     const response = await fetch("/.netlify/functions/create-payment-intent", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: 10000 }),
+      body: JSON.stringify({
+        amount: amount,
+      }),
     }).then((res) => res.json());
 
     const {
       paymentIntent: { client_secret },
     } = response;
 
-    const paymentResult = await stripe.confirmCardPayment(client_secret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: "test user",
-        },
+    const { error } = await stripe.confirmPayment({
+      elements,
+      clientSecret: client_secret,
+      confirmParams: {
+        return_url: "http://localhost:8888/payment-status",
       },
     });
-    if (paymentResult.error) {
-      // alert(paymentResult.error);
-      alert("Payment Successful");
 
-    } else {
-      if (paymentResult.paymentIntent.status === "succeeded") {
-        alert("Payment Successful");
-      }
+    if (error) {
+      // This point is only reached if there's an immediate error when
+      // confirming the payment. Show the error to your customer (for example, payment details incomplete)
+      handleError(error);
+      window.alert(errorMessage);
     }
   };
 
   return (
-    <PaymentFormContainer onSubmit={paymentHandler}>
-      <FormContainer>
-        <h2>Credit Card Payment</h2>
-        <CardElement />
-        <Button buttonType={BUTTON_TYPE_CLASSES.inverted}> Pay now </Button>
-      </FormContainer>
-    </PaymentFormContainer>
+    <div className="payment-form-container" onSubmit={paymentHandler}>
+      <form className="form-container">
+        <h2>Payment</h2>
+        <PaymentElement />
+        <div>
+          <div id="message"></div>
+          <Button
+            className="payment-button"
+            buttonType={BUTTON_TYPE_CLASSES.inverted}
+            disabled={!stripe || loading}
+          >
+            Pay now
+          </Button>
+          <br />
+        </div>
+      </form>
+    </div>
   );
 };
 
