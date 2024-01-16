@@ -18,7 +18,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const toggleCartDropdown = useSelector(selectToggleCartDropdown);
   if (toggleCartDropdown) {
-    dispatch(toggleCartDropdownAction(toggleCartDropdown));
+    dispatch(toggleCartDropdownAction(!toggleCartDropdown));
   }
   const cartItems = useSelector(selectCartItems);
   const cartTotalPrice = useSelector(selectCartTotoalPrice);
