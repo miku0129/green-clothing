@@ -7,16 +7,18 @@ import {
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-import { PaymentFormContainer, FormContainer } from "./payment-form.styles";
+import "./payment-form.styles.scss";
 
-const PaymentForm = ({props}) => {
+const PaymentForm = ({ props }) => {
   const stripe = useStripe();
   const elements = useElements();
 
   const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log("props", props)
+  //Stripeは金額が通貨の最小単位で指定されると想定されるため、
+  //10eurを請求する場合は amountを1000とする必要がある
+  const amount = props * 100;
 
   const handleError = (error) => {
     setLoading(false);
@@ -45,7 +47,7 @@ const PaymentForm = ({props}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: props,
+        amount: amount,
       }),
     }).then((res) => res.json());
 
@@ -57,7 +59,7 @@ const PaymentForm = ({props}) => {
       elements,
       clientSecret: client_secret,
       confirmParams: {
-        return_url: "http://localhost:8888/payment-success",
+        return_url: "http://localhost:8888/payment-status",
       },
     });
 
@@ -70,18 +72,23 @@ const PaymentForm = ({props}) => {
   };
 
   return (
-    <PaymentFormContainer onSubmit={paymentHandler}>
-      <FormContainer>
+    <div className="payment-form-container" onSubmit={paymentHandler}>
+      <form className="form-container">
         <h2>Payment</h2>
         <PaymentElement />
-        <Button
-          buttonType={BUTTON_TYPE_CLASSES.inverted}
-          disabled={!stripe || loading}
-        >
-          Pay now
-        </Button>
-      </FormContainer>
-    </PaymentFormContainer>
+        <div>
+          <div id="message"></div>
+          <Button
+            className="payment-button"
+            buttonType={BUTTON_TYPE_CLASSES.inverted}
+            disabled={!stripe || loading}
+          >
+            Pay now
+          </Button>
+          <br />
+        </div>
+      </form>
+    </div>
   );
 };
 

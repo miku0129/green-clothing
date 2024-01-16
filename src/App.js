@@ -14,7 +14,7 @@ import Nav from "./routes/nav/nav.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-import PaymentSuccess from "./compoments/payment-success/payment-success.component";
+import PaymentStatus from "./compoments/payment-status/payment-status.component";
 
 // import { setCurrentUser } from "./store/user/user.action";
 import { checkUserSession } from "./store/user/user.action";
@@ -41,7 +41,8 @@ const App = () => {
         <Route path="shop/*" element={<Shop />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="auth" element={<Authentication />} />
-        <Route path="payment-success" element={<PaymentSuccess />} />
+        <Route path="payment-status" element={<PaymentStatus />} />
+
       </Route>
     </Routes>
   );
