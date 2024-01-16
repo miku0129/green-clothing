@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { selectCartItems } from "../../store/cart/cart.selector";
+import { clearItemFromCartAction } from "../../store/cart/cart.action";
+
 import { useStripe } from "@stripe/react-stripe-js";
 
 import "./payment-status.styles.scss";
@@ -6,6 +12,10 @@ import "./payment-status.styles.scss";
 const PaymentStatus = () => {
   const stripe = useStripe();
   const [message, setMessage] = useState(null);
+
+  const cartItems = useSelector(selectCartItems);
+  console.log("cartItems", cartItems);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!stripe) {
@@ -20,7 +30,6 @@ const PaymentStatus = () => {
 
     // Retrieve the PaymentIntent
     stripe.retrievePaymentIntent(client_secret).then(({ paymentIntent }) => {
-      console.log("??", paymentIntent);
       // Inspect the PaymentIntent `status` to indicate the status of the payment
       // to your customer.
       //
@@ -30,6 +39,9 @@ const PaymentStatus = () => {
       // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
       switch (paymentIntent.status) {
         case "succeeded":
+          cartItems.forEach((cartItem) => {
+            dispatch(clearItemFromCartAction(cartItems, cartItem));
+          });
           setMessage("Success! Payment received.");
           break;
 
@@ -50,7 +62,7 @@ const PaymentStatus = () => {
           break;
       }
     });
-  }, [stripe]);
+  }, [stripe, cartItems, dispatch]);
 
   return (
     <div>
