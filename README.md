@@ -20,10 +20,12 @@ Green Clothing is an online fashion store built with modern web technologies. It
 - **User Authentication**: Secure user authentication system with sign-up and login functionality.
 - **Payment Integration**: Seamless payment gateways for smooth and secure transactions.
 
-## Demo
+## Demo-authentication
 
 <img src="./assets/green-clothing-signin.gif" width="90%" height="90%"/>
-<hr />
+
+## Demo-payment by credit card
+
 <img src="./assets/green-clothing-payment.gif" width="90%" height="90%"/>
 
 
