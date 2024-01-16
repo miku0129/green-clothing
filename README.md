@@ -1,8 +1,5 @@
 # Green Clothing - Online Fashion Store
 
-![Green Clothing](https://img.shields.io/badge/Green%20Clothing-Online%20Fashion%20Store-green?style=flat-square)
-![License](https://img.shields.io/github/license/miku0129/green-clothing?style=flat-square)
-
 Green Clothing is an online fashion store built with modern web technologies. It offers a wide range of eco-friendly and sustainable clothing options for fashion-conscious customers who care about the environment.
 
 ## Table of Contents
@@ -18,22 +15,22 @@ Green Clothing is an online fashion store built with modern web technologies. It
 
 ## Features
 
-- **Product Catalog**: Browse a diverse catalog of eco-friendly clothing, shoes, and accessories.
-- **User Authentication**: Secure user authentication system with sign-up and login functionality.
+- **Product Catalog**: Browse a diverse catalog of clothing, shoes, and accessories.
 - **Shopping Cart**: Add products to the cart and proceed to checkout.
-- **Payment Integration**: Seamlessly integrate payment gateways for smooth and secure transactions.
+- **User Authentication**: Secure user authentication system with sign-up and login functionality.
+- **Payment Integration**: Seamless payment gateways for smooth and secure transactions.
 
 ## Demo
 
-<img src="./assets/greenclothing-demo.gif" width="90%" height="90%"/>
+<img src="./assets/greenclothing-signin.gif" width="90%" height="90%"/>
 
 ## Technologies Used
 
 - Frontend: React.js, styled-components
-- Backend: Node.js, Firebase
-- Database: Firestore
 - Authentication: Firebase Authentication
 - Payment Integration: Stripe
+- Backend: Node.js, Firebase
+- Database: Firestore
 - Deployment: Netlify
 
 ## Installation
