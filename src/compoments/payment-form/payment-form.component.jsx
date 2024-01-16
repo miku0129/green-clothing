@@ -57,7 +57,7 @@ const PaymentForm = ({props}) => {
       elements,
       clientSecret: client_secret,
       confirmParams: {
-        return_url: "http://localhost:8888/",
+        return_url: "http://localhost:8888/payment-success",
       },
     });
 
