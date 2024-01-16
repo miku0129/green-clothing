@@ -66,7 +66,7 @@ const PaymentStatus = () => {
 
   return (
     <div>
-      <p>{message}</p>
+      <h1 className="status-message">{message}</h1>
     </div>
   );
 };
