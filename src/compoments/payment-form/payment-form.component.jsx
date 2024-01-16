@@ -59,7 +59,7 @@ const PaymentForm = ({ props }) => {
       elements,
       clientSecret: client_secret,
       confirmParams: {
-        return_url: "http://localhost:8888/payment-status",
+        return_url: "https://jazzy-kitten-d0239f.netlify.app/payment-status",
       },
     });
 
