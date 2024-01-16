@@ -22,7 +22,10 @@ Green Clothing is an online fashion store built with modern web technologies. It
 
 ## Demo
 
-<img src="./assets/greenclothing-signin.gif" width="90%" height="90%"/>
+<img src="./assets/green-clothing-signin.gif" width="90%" height="90%"/>
+<hr />
+<img src="./assets/green-clothing-payment.gif" width="90%" height="90%"/>
+
 
 ## Technologies Used
 
