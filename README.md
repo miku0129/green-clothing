@@ -28,7 +28,6 @@ Green Clothing is an online fashion store built with modern web technologies. It
 
 <img src="./assets/green-clothing-payment.gif" width="90%" height="90%"/>
 
-
 ## Technologies Used
 
 - Frontend: React.js, styled-components
